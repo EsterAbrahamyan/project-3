@@ -1,0 +1,54 @@
+.nav {
+    display: flex;
+    gap: 15px;
+    margin-right: 10px;
+}
+
+ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+}
+
+li {
+    color: black;
+    text-align: center;
+
+    text-decoration: none;
+}
+
+a {
+    text-decoration: none;
+    color: inherit;
+}
+
+.logo img {
+    width: 100px;
+    border-right: 1px solid #bbb;
+}
+
+.mybrand {
+    justify-self: flex-end;
+}
+
+.logotext {
+    font-family: 'Pacifico', cursive;
+    font-weight: bold;
+    border-radius: 20px 40px 20px 40px;
+    color: black;
+    font-style: italic;
+}
+
+.basket {
+    padding-right: 10px;
+    position: relative;
+    display: flex;
+}
+
+.cartIcon {
+    position: absolute;
+    right: 0;
+    top: -70%;
+    font-size: 15px;
+
+}
