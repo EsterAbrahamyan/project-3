@@ -9,11 +9,18 @@ import Assortment from './Assortment';
 import Product from './Product';
 import ShoppingCart from './ShoppingCart';
 import Order from './Order';
+import { createContext } from 'react';
+import { useState } from 'react';
 
 
+
+export const myContext = createContext()
 function App() {
+ const [cart,setCart]= useState([])
   return (
     <div className="App">
+      
+      <myContext.Provider value={{cart,setCart}}>
       <Header />
       <Routes>
         <Route path='/' element={<ProductList />} />
@@ -25,9 +32,13 @@ function App() {
         <Route path='/assortment' element={<Assortment />} />
         <Route path='/shoppingcart' element={<ShoppingCart />} />
       </Routes>
+      </myContext.Provider>
+      
+
       <Footer/>
     </div>
   );
-}
+};
+ 
 
 export default App;
