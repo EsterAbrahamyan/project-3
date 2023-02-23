@@ -1,50 +1,57 @@
-import React, { useState } from 'react';
-import {myContext} from './App';
-import {useContext} from 'react';
+import React, { useContext } from "react";
+import { myContext } from "./App";
+// import CartCount from "./CartCount";
+
+
+
+function CartCount(props) {
+  const { productCount } = props;
+  const totalCount = Object.values(productCount).reduce((acc, count) => acc + count, 0);
+  return <div>Ընդհ․քանակ: {totalCount}</div>;
+}
 
 
 
 function ShoppingCart() {
-  // const [cartValue, setCartValue] = useState(0);
+  const { cart } = useContext(myContext);
 
-  // function handleClick () {
-  //   setCartValue(cartValue + 1);
-  // };
-  const {cart}=useContext(myContext)
-  console.log(cart)
+  const productCount = cart.reduce((count, product) => {
+    count[product.id] = count[product.id] ? count[product.id] + 1 : 1;
+    return count;
+  }, {});
 
   return (
-// //     <div className="shop_cart">
-// //       <a className="cart-tt" href="/" title="View your shopping cart : ">
-// //         <div className="basket">
-// //           <i className="fa-solid fa-cart-shopping"></i>
-// //           <p className="cartIcon"></p>
-// // </div>
-//       </a>
-//       {/* <button className="btn" onClick={handleClick}>Գնել</button> */}
-//     </div>
-<div className="parent">
-      {cart.map((element) => {
-        return (
-          <div key={element.id}>
-            <div className="child">
-              
+    <div>
+      <CartCount productCount={productCount} />
+      <div className="parent">
+        {cart.reduce((uniqueElements, element) => {
+          if (!uniqueElements.some((el) => el.id === element.id)) {
+            uniqueElements.push(element);
+          }
+          return uniqueElements;
+        }, []).map((element) => {
+          return (
+            <div key={element.id}>
+              <div className="child">
                 <img src={element.imgSrc} alt={element.id} />
-              
-              <p>
-                <strong>{element.name}</strong>
-                <br />
-                {element.price}դր/1կտ
-                <br />
+                <p>
+                  <strong>{element.name}</strong>
+                  <br />
+                  {element.price}դր/1կտ
+                  <br />
+                    
+                </p>
                 
-                
-              </p>
+              </div >
+              <div style={{fontSize:15,justifyContent:"center"}}>
+              Դուք գնել եք {productCount[element.id]} կտ
             </div>
-          </div>
-        );
-      })}
+            </div>
+          );
+        })}
+      </div>
     </div>
   );
-  }  
+}
 
 export default ShoppingCart;
