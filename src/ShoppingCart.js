@@ -7,10 +7,8 @@ import { myContext } from "./App";
 function CartCount(props) {
   const { productCount } = props;
   const totalCount = Object.values(productCount).reduce((acc, count) => acc + count, 0);
-  return <div>Ընդհ․քանակ: {totalCount}</div>;
+  return <div>Ընդհ․քանակը՝  {totalCount} կտ</div>;
 }
-
-
 
 function ShoppingCart() {
   const { cart } = useContext(myContext);
@@ -23,6 +21,8 @@ function ShoppingCart() {
   return (
     <div>
       <CartCount productCount={productCount} />
+      {/* <TotalAmmount productCount={TotalAmmount}/> */}
+
       <div className="parent">
         {cart.reduce((uniqueElements, element) => {
           if (!uniqueElements.some((el) => el.id === element.id)) {
@@ -43,7 +43,7 @@ function ShoppingCart() {
                 </p>
                 
               </div >
-              <div style={{fontSize:15,justifyContent:"center"}}>
+              <div style={{fontSize:15,textAlign: 'center' }}>
               Դուք գնել եք {productCount[element.id]} կտ
             </div>
             </div>
