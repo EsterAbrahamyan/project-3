@@ -117,4 +117,10 @@ main {
 .contactinfo{
   font-size: 30px;
 }
+.child img {
+  width: 240px;
+  object-fit: cover;
+  height: 230px;
+
+}
 

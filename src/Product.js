@@ -1,25 +1,31 @@
 // Product.js
-import { useParams } from "react-router-dom";
-import { data } from "./DataProduct";
+import { useParams,} from "react-router-dom";
+import { useEffect,useState } from "react";
+// import { data } from "./DataProduct";
 
 function Product() {
-  const params = useParams()
-  console.log(data[params.id - 1])
+  const {id} = useParams()
+  console.log(id)
+   const [cakeData,setCakeData]=useState([]);
+  useEffect(()=>{
+
+    fetch('http://localhost:3001/get/'+id)
+    .then(res=>res.json())
+    .then(res=>setCakeData(res));
+  },[id])
+    
+  
       return (
     <div className="child">
-      {data[params.id - 1] ? (
-
-        <div>
-          <img src={data[params.id - 1].imgSrc} alt={data.id} style={{ width: "100%", height: "auto" }} />
-          {/* <img src={data[params.id - 1].imgSrc} /> */}
-          {/* { <p>{data[params.id - 1].price}</p> } */}
-          {<p>{data[params.id - 1].recept}</p>}
-        
-
-        </div>
-      )
-        : <></>
-      }
+     <img src={cakeData.imgSrc} alt={cakeData.name} />
+     <p>
+                <strong>{cakeData.name}</strong>
+                <br />
+                {cakeData.price}դր/1կտ
+                <br />
+                </p>
+     
+     
 
     </div>
   );
